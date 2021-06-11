@@ -30,81 +30,6 @@
 			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
-                <!-- <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">3</span></a>
-                    <div class="dropdown-menu notifications">
-                        <div class="topnav-dropdown-header">
-                            <span>Notifications</span>
-                        </div>
-                        <div class="drop-scroll">
-                            <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">
-												<img alt="John Doe" src="assets/img/user.jpg" class="img-fluid">
-											</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
-												<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
-												<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">L</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-												<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">G</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
-												<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-												<p class="noti-time"><span class="notification-time">2 days ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="topnav-dropdown-footer">
-                            <a href="activities.php">View all Notifications</a>
-                        </div>
-                    </div>
-                </li> -->
-                <!-- <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
-                </li> -->
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
@@ -164,234 +89,37 @@
                     </div>
                 </div>
 				<div class="row doctor-grid">
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-03.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                    <?php 
+                        include 'assets/backend/dbconnect.php';
+
+                        $stmt = $pdo->prepare("SELECT * FROM `doctors`");
+                        $stmt->execute();
+                        $result = $stmt->fetchAll();
+
+                        foreach($result as $row){  
+                    ?>
+                        <div class="col-md-4 col-sm-4  col-lg-3">
+                            <div class="profile-widget">
+                                <div class="doctor-img">
+                                    <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-03.jpg"></a>
+                                </div>
+                                <div class="dropdown profile-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="edit-doctor.php?doctorid=<?php echo $row["id"]; ?>"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                    </div>
+                                </div>
+                                <h4 class="doctor-name text-ellipsis"><a href="#"><?php echo $row['firstname'] . ' ' . $row['surname']; ?></a></h4>
+                                <div class="doc-prof"><?php echo $row['department']; ?></div>
+                                <div class="user-country">
+                                    <i class="fa fa-map-marker"></i> <?php echo $row['address'] . ', ' . $row['city']; ?>
                                 </div>
                             </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Cristina Groves</a></h4>
-                            <div class="doc-prof">Gynecologist</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-07.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Marie Wells</a></h4>
-                            <div class="doc-prof">Psychiatrist</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-04.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Henry Daniels</a></h4>
-                            <div class="doc-prof">Cardiologist</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-11.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Mark Hunter</a></h4>
-                            <div class="doc-prof">Urologist</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="#"><img alt="" src="assets/img/doctor-thumb-12.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Michael Sullivan</a></h4>
-                            <div class="doc-prof">Ophthalmologist</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-02.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Linda Barrett</a></h4>
-                            <div class="doc-prof">Dentist</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-09.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Ronald Jacobs</a></h4>
-                            <div class="doc-prof">Oncologist</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-01.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Albert Sandoval</a></h4>
-                            <div class="doc-prof">Neurologist</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-05.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Diana Bailey</a></h4>
-                            <div class="doc-prof">General Surgery</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-10.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Shirley Willis</a></h4>
-                            <div class="doc-prof">Radiologist</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-08.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Pamela Curtis</a></h4>
-                            <div class="doc-prof">Pediatrics</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4  col-lg-3">
-                        <div class="profile-widget">
-                            <div class="doctor-img">
-                                <a class="avatar" href="profile.php"><img alt="" src="assets/img/doctor-thumb-06.jpg"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="edit-doctor.php"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="profile.php">Justin Parker</a></h4>
-                            <div class="doc-prof">Physical Therapist</div>
-                            <div class="user-country">
-                                <i class="fa fa-map-marker"></i> United States, San Francisco
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                        }
+                    ?>
                 </div>
 				<div class="row">
                     <div class="col-sm-12">

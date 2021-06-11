@@ -2,6 +2,7 @@
 <html lang="en">
 <!-- add-patient24:06-->
 <head>
+    {% load static 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <!--[if lt IE 9]>
@@ -28,81 +30,6 @@
 			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
-                <!-- <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">3</span></a>
-                    <div class="dropdown-menu notifications">
-                        <div class="topnav-dropdown-header">
-                            <span>Notifications</span>
-                        </div>
-                        <div class="drop-scroll">
-                            <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">
-												<img alt="John Doe" src="assets/img/user.jpg" class="img-fluid rounded-circle">
-											</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
-												<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
-												<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">L</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-												<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">G</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
-												<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-												<p class="noti-time"><span class="notification-time">2 days ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="topnav-dropdown-footer">
-                            <a href="activities.php">View all Notifications</a>
-                        </div>
-                    </div>
-                </li> -->
-                <!-- <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
-                </li> -->
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
@@ -165,33 +92,33 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>First Name <span class="text-danger">*</span></label>
-                                        <input class="form-control" name="firstname" type="text">
+                                        <input class="form-control" name="firstname" type="text" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Last Name</label>
-                                        <input class="form-control" name="surname" type="text">
+                                        <input class="form-control" name="surname" type="text" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Email <span class="text-danger">*</span></label>
-                                        <input class="form-control" name="email" type="email">
+                                        <input class="form-control" name="email" type="email" required>
                                     </div>
                                 </div>
 								<div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Date of Birth</label>
                                         <div class="cal-icon">
-                                            <input type="text" name="dob" class="form-control datetimepicker">
+                                            <input type="text" name="dob" class="form-control datetimepicker" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Phone </label>
-                                        <input class="form-control" name="phonenumber" type="text">
+                                        <input class="form-control" name="phonenumber" type="text" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -199,7 +126,7 @@
 										<label class="gen-label">Gender:</label>
 										<div class="form-check-inline">
 											<label class="form-check-label">
-												<input type="radio" name="gender" class="form-check-input" value="Male">Male
+												<input type="radio" name="gender" class="form-check-input" value="Male" checked>Male
 											</label>
 										</div>
 										<div class="form-check-inline">
@@ -214,19 +141,19 @@
 										<div class="col-sm-12">
 											<div class="form-group">
 												<label>Address</label>
-												<input type="text" name="address" class="form-control ">
+												<input type="text" name="address" class="form-control" required>
 											</div>
 										</div>
 										<div class="col-sm-6 col-md-6 col-lg-3">
 											<div class="form-group">
 												<label>City</label>
-												<input type="text" name="city" class="form-control">
+												<input type="text" name="city" class="form-control" required>
 											</div>
 										</div>
 										<div class="col-sm-6 col-md-6 col-lg-3">
 											<div class="form-group">
 												<label>State/Province</label>
-                                                <input type="text" name="province" class="form-control ">
+                                                <input type="text" name="province" class="form-control" required> 
 											</div>
 										</div>
 									</div>
@@ -264,215 +191,6 @@
                                 <button class="btn btn-primary submit-btn">Create Patient</button>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-			<div class="notification-box">
-                <div class="msg-sidebar notifications msg-noti">
-                    <div class="topnav-dropdown-header">
-                        <span>Messages</span>
-                    </div>
-                    <div class="drop-scroll msg-list-scroll" id="msg_list">
-                        <ul class="list-box">
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">R</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Richard Miles </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item new-message">
-                                        <div class="list-left">
-                                            <span class="avatar">J</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">John Doe</span>
-                                            <span class="message-time">1 Aug</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">T</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Tarah Shropshire </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">M</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Mike Litorus</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">C</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Catherine Manseau </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">D</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Domenic Houston </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">B</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Buster Wigton </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">R</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Rolland Webber </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">C</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Claire Mapes </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">M</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Melita Faucher</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">J</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Jeffery Lalor</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">L</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Loren Gatlin</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.php">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">T</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Tarah Shropshire</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="topnav-dropdown-footer">
-                        <a href="chat.php">See all messages</a>
                     </div>
                 </div>
             </div>

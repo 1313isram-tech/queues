@@ -30,81 +30,6 @@
 			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
-                <!-- <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">3</span></a>
-                    <div class="dropdown-menu notifications">
-                        <div class="topnav-dropdown-header">
-                            <span>Notifications</span>
-                        </div>
-                        <div class="drop-scroll">
-                            <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">
-												<img alt="John Doe" src="assets/img/user.jpg" class="img-fluid rounded-circle">
-											</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
-												<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
-												<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">L</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-												<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">G</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
-												<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-												<p class="noti-time"><span class="notification-time">2 days ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="topnav-dropdown-footer">
-                            <a href="activities.php">View all Notifications</a>
-                        </div>
-                    </div>
-                </li> -->
-                <!-- <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
-                </li> -->
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
@@ -165,50 +90,38 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <form>
+                        <form method="POST" action="assets/backend/controller.php?act=addDoctor">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>First Name <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text">
+                                        <input class="form-control" name="firstname" type="text" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Last Name</label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Username <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text">
+                                        <input class="form-control" name="surname" type="text" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Email <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input class="form-control" type="password">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Confirm Password</label>
-                                        <input class="form-control" type="password">
+                                        <input class="form-control" type="email" name="email" required>
                                     </div>
                                 </div>
 								<div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Date of Birth</label>
                                         <div class="cal-icon">
-                                            <input type="text" class="form-control datetimepicker">
+                                            <input type="text" name="dob" class="form-control datetimepicker" required>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Phone </label>
+                                        <input class="form-control" name="phonenumber" type="text" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -216,12 +129,12 @@
 										<label class="gen-label">Gender:</label>
 										<div class="form-check-inline">
 											<label class="form-check-label">
-												<input type="radio" name="gender" class="form-check-input">Male
+												<input type="radio" name="gender" class="form-check-input" value="Male" checked>Male
 											</label>
 										</div>
 										<div class="form-check-inline">
 											<label class="form-check-label">
-												<input type="radio" name="gender" class="form-check-input">Female
+												<input type="radio" name="gender" class="form-check-input" value="Female">Female
 											</label>
 										</div>
 									</div>
@@ -231,49 +144,38 @@
 										<div class="col-sm-12">
 											<div class="form-group">
 												<label>Address</label>
-												<input type="text" class="form-control ">
-											</div>
-										</div>
-										<div class="col-sm-6 col-md-6 col-lg-3">
-											<div class="form-group">
-												<label>Country</label>
-												<select class="form-control select">
-													<option>USA</option>
-													<option>United Kingdom</option>
-												</select>
+												<input type="text" name="address" class="form-control" required>
 											</div>
 										</div>
 										<div class="col-sm-6 col-md-6 col-lg-3">
 											<div class="form-group">
 												<label>City</label>
-												<input type="text" class="form-control">
+												<input type="text" name="city" class="form-control" required>
 											</div>
 										</div>
 										<div class="col-sm-6 col-md-6 col-lg-3">
 											<div class="form-group">
 												<label>State/Province</label>
-												<select class="form-control select">
-													<option>California</option>
-													<option>Alaska</option>
-													<option>Alabama</option>
-												</select>
+												<input type="text" name="province" class="form-control" required>
 											</div>
 										</div>
-										<div class="col-sm-6 col-md-6 col-lg-3">
-											<div class="form-group">
-												<label>Postal Code</label>
-												<input type="text" class="form-control">
-											</div>
-										</div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Department </label>
+                                                <select class="select" name="department" required>
+                                                    <option>Select</option>
+                                                    <option>Dentists</option>
+                                                    <option>Neurology</option>
+                                                    <option>Opthalmology</option>
+                                                    <option>Orthopedics</option>
+                                                    <option>Cancer Department</option>
+                                                    <option>ENT Department</option>
+                                                </select>
+                                            </div>
+                                        </div>
 									</div>
 								</div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Phone </label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
+                                <!-- <div class="col-sm-6">
 									<div class="form-group">
 										<label>Avatar</label>
 										<div class="profile-upload">
@@ -285,22 +187,18 @@
 											</div>
 										</div>
 									</div>
-                                </div>
-                            </div>
-							<div class="form-group">
-                                <label>Short Biography</label>
-                                <textarea class="form-control" rows="3" cols="30"></textarea>
+                                </div> -->
                             </div>
                             <div class="form-group">
                                 <label class="display-block">Status</label>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="status" id="doctor_active" value="option1" checked>
+									<input class="form-check-input" type="radio" name="status" id="doctor_active" value="Active" checked>
 									<label class="form-check-label" for="doctor_active">
 									Active
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="status" id="doctor_inactive" value="option2">
+									<input class="form-check-input" type="radio" name="status" id="doctor_inactive" value="Inactive">
 									<label class="form-check-label" for="doctor_inactive">
 									Inactive
 									</label>

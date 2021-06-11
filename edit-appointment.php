@@ -1,3 +1,23 @@
+<?php 
+    include 'assets/backend/dbconnect.php';
+    $appointmentid = $_GET['appointmentid'];
+
+    $stmt = $pdo->prepare("SELECT * FROM `appointments` WHERE appointmentid = '$appointmentid'");
+    $stmt->execute();
+
+    $result = $stmt->fetchAll();
+
+    foreach ($result as $row){
+        $patient = $row['patient'];
+        $doctor = $row['doctor'];
+        $department = $row['department'];
+        $email = $row['email'];
+        $phonenumber = $row['phonenumber'];
+        $date = $row['date'];
+        $time = $row['time'];
+        $status = $row['status'];
+    }
+?>                                                
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,81 +50,6 @@
 			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
-                <!-- <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">3</span></a>
-                    <div class="dropdown-menu notifications">
-                        <div class="topnav-dropdown-header">
-                            <span>Notifications</span>
-                        </div>
-                        <div class="drop-scroll">
-                            <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">
-												<img alt="John Doe" src="assets/img/user.jpg" class="img-fluid rounded-circle">
-											</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
-												<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
-												<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">L</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-												<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">G</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
-												<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.php">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-												<p class="noti-time"><span class="notification-time">2 days ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="topnav-dropdown-footer">
-                            <a href="activities.php">View all Notifications</a>
-                        </div>
-                    </div>
-                </li> -->
-                <!-- <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
-                </li> -->
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
@@ -162,21 +107,33 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <form>
+                        <form method="POST" action="assets/backend/controller.php?act=editAppointment">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
 										<label>Appointment ID</label>
-										<input class="form-control" type="text" value="APT-0001" readonly="">
+										<input class="form-control" type="text" name="appointmentid" value="<?php echo $appointmentid; ?>" readonly="">
 									</div>
                                 </div>
                                 <div class="col-md-6">
 									<div class="form-group">
 										<label>Patient Name</label>
-										<select class="select">
-											<option>Select</option>
-											<option>Jennifer Robinson</option>
-											<option class="selected">Terry Baker</option>
+										<select class="select" name="patient">
+											<!-- <option>Select</option> -->
+											<?php 
+                                                include 'assets/backend/dbconnect.php';
+
+                                                $stmt = $pdo->prepare("SELECT * FROM `patients`");
+                                                $stmt->execute();
+                                                $result = $stmt->fetchAll();
+
+                                                foreach($result as $row){  
+                                            ?>
+											    <option><?php echo $row['firstname'] . ' ' . $row['surname']; ?></option>
+											<?php
+                                                }
+                                            ?>
+											<option class="selected"><?php echo $patient; ?></option>
 										</select>
 									</div>
                                 </div>
@@ -185,8 +142,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Department</label>
-                                        <select class="select">
-                                            <option>Select</option>
+                                        <select class="select" name="department">
+                                            <option selected><?php echo $department; ?></option>
                                             <option>Dentists</option>
                                             <option>Neurology</option>
                                             <option>Opthalmology</option>
@@ -199,11 +156,22 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Doctor</label>
-                                        <select class="select">
-											<option>Select</option>
-											<option>Cristina Groves</option>
-											<option>Marie Wells</option>
-											<option selected>Henry Daniels</option>
+                                        <select class="select" name="doctor">
+											<option selected> <?php echo $doctor; ?></option>
+											<!-- <option>Select</option> -->
+                                            <?php 
+                                                // include 'assets/backend/dbconnect.php';
+
+                                                $stmt = $pdo->prepare("SELECT * FROM `doctors`");
+                                                $stmt->execute();
+                                                $result = $stmt->fetchAll();
+
+                                                foreach($result as $row){  
+                                            ?>
+											    <option><?php echo $row['firstname'] . ' ' . $row['surname']; ?></option>
+											<?php
+                                                }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -213,7 +181,7 @@
                                     <div class="form-group">
                                         <label>Date</label>
                                         <div class="cal-icon">
-                                            <input type="text" class="form-control datetimepicker">
+                                            <input type="text" name="date" value="<?php echo $date; ?>" class="form-control datetimepicker">
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +189,7 @@
                                     <div class="form-group">
                                         <label>Time</label>
                                         <div class="time-icon">
-                                            <input type="text" class="form-control" id="datetimepicker3">
+                                            <input type="text" name="time" value="<?php echo $time; ?>" class="form-control" id="datetimepicker3">
                                         </div>
                                     </div>
                                 </div>
@@ -230,26 +198,26 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Patient Email</label>
-                                        <input class="form-control" type="email">
+                                        <input class="form-control" name="email" value="<?php echo $email; ?>" type="email">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Patient Phone Number</label>
-                                        <input class="form-control" type="text">
+                                        <input class="form-control" name="phonenumber" value="<?php echo $phonenumber; ?>" type="text">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="display-block">Appointment Status</label>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="status" id="product_active" value="option1" checked>
+									<input class="form-check-input" type="radio" name="status" id="product_active" value="Active" <?php if($status == "Active"){ echo "checked"; }?>>
 									<label class="form-check-label" for="product_active">
 									Active
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="status" id="product_inactive" value="option2">
+									<input class="form-check-input" type="radio" name="status" id="product_inactive" value="Inactive" <?php if($status == "Inactive"){ echo "checked"; }?>>
 									<label class="form-check-label" for="product_inactive">
 									Inactive
 									</label>
